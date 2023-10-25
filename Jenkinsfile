@@ -3,8 +3,19 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building the application...'
-                // Add your build steps here
+                echo 'Running ls command...'
+                sh 'ls'
+                
+                echo 'Printing the date...'
+                sh 'date'
+                
+                echo 'Creating a directory named \'jenkins\'...'
+                sh 'mkdir jenkins'
+                
+                echo 'Changing directory to \'jenkins\'...'
+                dir('jenkins') {
+                    echo 'Current directory (pwd) inside \'jenkins\':'
+                    sh 'pwd'
             }
         }
         stage('Test') {
