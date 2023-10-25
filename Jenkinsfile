@@ -1,34 +1,39 @@
 pipeline {
-    agent any 
+    agent any
+    environment {
+        DOCKER_HUB_USERNAME = credentials('Sravan40')
+        DOCKER_HUB_PASSWORD = credentials('Sravan@4070')
+    }
     stages {
-        stage('Build') {
+        stage('Pull and Build') {
             steps {
-                echo 'Running ls command...'
-                sh 'ls'
-                
-                echo 'Printing the date...'
-                sh 'date'
-                
-                echo 'Creating a directory named \'jenkins\'...'
-                sh 'mkdir jenkins'
-                
-                echo 'Changing directory to \'jenkins\'...'
-                dir('jenkins') {
-                    echo 'Current directory (pwd) inside \'jenkins\':'
-                    sh 'pwd'
+                script {
+                    echo 'Cloning repository...'
+                    sh 'git clone https://github.com/Sravan40/app.git'
+                    dir('app/project1') {
+                        echo 'Building Docker image...'
+                        sh 'docker build -t myappv1 .'
+                    }
                 }
             }
         }
-        stage('Test') {
+        stage('Push to Docker Hub') {
             steps {
-                echo 'Running tests...'
-                // Add your test steps here
+                script {
+                    echo 'Logging in to Docker Hub...'
+                    sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
+                    echo 'Pushing Docker image to Docker Hub...'
+                    sh 'docker tag myappv1 ${DOCKER_HUB_USERNAME}/myappv1:latest'
+                    sh 'docker push ${DOCKER_HUB_USERNAME}/myappv1:latest'
+                }
             }
         }
         stage('Deploy') {
             steps {
-                echo 'Deploying the application...'
-                // Add your deployment steps here
+                script {
+                    echo 'Deploying Docker image...'
+                    // Add deployment steps here (e.g., docker run command)
+                }
             }
         }
     }
