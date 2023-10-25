@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    environment {
-        DOCKER_HUB_USERNAME = credentials('sravan40')
-        DOCKER_HUB_PASSWORD = credentials('Sravan@4070')
-    }
     stages {
         stage('Pull and Build') {
             steps {
@@ -21,10 +17,10 @@ pipeline {
             steps {
                 script {
                     echo 'Logging in to Docker Hub...'
-                    sh "sudo docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
+                    sh "sudo docker login -u sravan40 -p Sravan@4070"
                     echo 'Pushing Docker image to Docker Hub...'
-                    sh 'sudo docker tag myappv1 ${DOCKER_HUB_USERNAME}/myappv1:latest'
-                    sh 'sudo docker push ${DOCKER_HUB_USERNAME}/myappv1:latest'
+                    sh 'sudo docker tag myappv1 sravan40/myappv1:latest'
+                    sh 'sudo docker push sravan40/myappv1:latest'
                 }
             }
         }
