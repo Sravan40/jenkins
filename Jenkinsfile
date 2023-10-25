@@ -16,6 +16,7 @@ pipeline {
                 dir('jenkins') {
                     echo 'Current directory (pwd) inside \'jenkins\':'
                     sh 'pwd'
+                }
             }
         }
         stage('Test') {
@@ -31,5 +32,4 @@ pipeline {
             }
         }
     }
-}
 }
