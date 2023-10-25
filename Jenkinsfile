@@ -1,8 +1,8 @@
 pipeline {
     agent any
-    #environment {
-     #   DOCKER_HUB_USERNAME = credentials('sravan40')
-      #  DOCKER_HUB_PASSWORD = credentials('Sravan@4070')
+    environment {
+        DOCKER_HUB_USERNAME = credentials('sravan40')
+        DOCKER_HUB_PASSWORD = credentials('Sravan@4070')
     }
     stages {
         stage('Pull and Build') {
