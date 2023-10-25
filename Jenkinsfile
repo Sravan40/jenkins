@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        DOCKER_HUB_USERNAME = credentials('Sravan40')
+        DOCKER_HUB_USERNAME = credentials('sravan40')
         DOCKER_HUB_PASSWORD = credentials('Sravan@4070')
     }
     stages {
@@ -12,7 +12,7 @@ pipeline {
                     sh 'git clone https://github.com/Sravan40/app.git'
                     dir('app/project1') {
                         echo 'Building Docker image...'
-                        sh 'docker build -t myappv1 .'
+                        sh 'sudo docker build -t myappv1 .'
                     }
                 }
             }
@@ -21,10 +21,10 @@ pipeline {
             steps {
                 script {
                     echo 'Logging in to Docker Hub...'
-                    sh "docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
+                    sh "sudo docker login -u ${DOCKER_HUB_USERNAME} -p ${DOCKER_HUB_PASSWORD}"
                     echo 'Pushing Docker image to Docker Hub...'
-                    sh 'docker tag myappv1 ${DOCKER_HUB_USERNAME}/myappv1:latest'
-                    sh 'docker push ${DOCKER_HUB_USERNAME}/myappv1:latest'
+                    sh 'sudo docker tag myappv1 ${DOCKER_HUB_USERNAME}/myappv1:latest'
+                    sh 'sudo docker push ${DOCKER_HUB_USERNAME}/myappv1:latest'
                 }
             }
         }
