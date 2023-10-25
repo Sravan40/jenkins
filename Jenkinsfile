@@ -4,6 +4,8 @@ pipeline {
         stage('Pull and Build') {
             steps {
                 script {
+                    echo 'Removing existing app directory...'
+                    sh 'rm -rf app'
                     echo 'Cloning repository...'
                     sh 'git clone https://github.com/Sravan40/app.git'
                     dir('app/project1') {
