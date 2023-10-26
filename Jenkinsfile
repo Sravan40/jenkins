@@ -35,6 +35,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    echo "KUBECONFIG Environment Variable: ${env.KUBECONFIG}"
                     echo 'Creating namespaces...'
                     sh "kubectl create namespace sql"
                     sh "kubectl create namespace python"
