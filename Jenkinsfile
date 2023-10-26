@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        KUBECONFIG = '/home/ec2-user/.kube/config'
+        KUBECONFIG = '/var/lib/jenkins/kube/config'
         REPO_URL = 'https://github.com/Sravan40/app.git'
         MYSQL_DEPLOYMENT_FILE = 'app/project1/mysql-deployment.yaml'
         PYTHON_DEPLOYMENT_FILE = 'app/project1/python-deployment.yaml'
