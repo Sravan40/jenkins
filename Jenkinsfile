@@ -37,6 +37,7 @@ pipeline {
             steps {
                 script {
                     echo "KUBECONFIG Environment Variable: ${env.KUBECONFIG}"
+                    sh "kubectl get pods"
                     echo 'Creating namespaces...'
                     sh "kubectl create namespace sql"
                     sh "kubectl create namespace python"
