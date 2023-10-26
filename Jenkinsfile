@@ -35,6 +35,8 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    sh 'export KUBECONFIG=/path/to/your/kubeconfig.yaml'
+                    sh 'echo $KUBECONFIG' // Verify if the variable is correctly set
                     echo "KUBECONFIG Environment Variable: ${env.KUBECONFIG}"
                     echo 'Creating namespaces...'
                     sh "kubectl create namespace sql"
