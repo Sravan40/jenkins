@@ -1,6 +1,7 @@
 pipeline {
     agent any
     environment {
+        PATH = "/usr/local/bin:${env.PATH}"
         KUBECONFIG = '/var/lib/jenkins/kube/config'
         REPO_URL = 'https://github.com/Sravan40/app.git'
         MYSQL_DEPLOYMENT_FILE = 'app/project1/mysql-deployment.yaml'
